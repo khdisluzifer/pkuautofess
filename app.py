@@ -30,6 +30,10 @@ def start():
                             tw.post_tweet(message, sender_id, screen_name)
                             tw.delete_dm(id)
                         else:
+                            screen_name = tw.get_user_screen_name(sender_id)
+                            message = message
+                            errorMsg = "haram detected by "+screen_name+", msg: "+message
+                            print(errorMsg)
                             tw.delete_dm(id)
                     else:
                         tw.delete_dm(id)

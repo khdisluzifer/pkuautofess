@@ -18,7 +18,7 @@ class Twitter:
         try:
             api = self.init_tweepy()
             api.destroy_direct_message(id)
-            time.sleep(20)
+            time.sleep(1)
         except Exception as ex:
             print(ex)
             time.sleep(10)
@@ -39,7 +39,7 @@ class Twitter:
                 dms.append(d)
                 dms.reverse()
             print(str(len(dms))+" terkumpul")
-            time.sleep(30)
+            time.sleep(10)
             return dms
 
         except Exception as ex:

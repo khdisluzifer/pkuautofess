@@ -10,7 +10,7 @@ class Twitter:
     def init_tweepy():
         api = tweepy.OAuthHandler(constant.CONSUMER_KEY, constant.CONSUMER_SECRET)
         api.set_access_token(constant.ACCESS_KEY, constant.ACCESS_SECRET)
-        return tweepy.API(api)
+        return tweepy.API(api, wait_on_rate_limit=True)
     
     def delete_dm(self, id):
         print("Delete dm with id "+ str(id))

@@ -39,7 +39,7 @@ class Twitter:
                 dms.append(d)
                 dms.reverse()
             print(str(len(dms))+" terkumpul")
-            time.sleep(10)
+            time.sleep(5)
             return dms
 
         except Exception as ex:
@@ -52,8 +52,9 @@ class Twitter:
         api = self.init_tweepy()
         try:
             print("sender ", sn)
+            print(msg)
             api.update_status(msg)
-            time.sleep(30)
+            time.sleep(5)
         except Exception as ex:
             # api.destroy_direct_message(id)
             # api.send_direct_message(id, "kirim menfess kamu dalam jangka waktu 15 menit untuk menghindari duplikasi")

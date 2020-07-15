@@ -3,6 +3,13 @@ import time
 
 tw = Twitter()
 def start():
+    #list of haram words
+    haramWords = [
+        "pantek", "p4nt3k", "p4ntek", "pant3k",
+        "ngewe", "ng3w3", "ngew3", "ng3we",
+        "ngentot", "ng3nt0t", "ng3ntot", "ngent0t",
+        "kontol", "k0nt0l", "kont0l", "k0ntol"
+        ]
     print("Starting program...")
     dms = list()
     # print(dms)
@@ -16,12 +23,16 @@ def start():
 
                 if len(message) is not 0 and len(message) <= 500:
                     if "pkumf" in message:
-                        screen_name = tw.get_user_screen_name(sender_id)
-                        message = message
-                        tw.post_tweet(message, sender_id, screen_name)
+                        res = [ele for ele in haramWords if(ele in message)]
+                        if not res:
+                            screen_name = tw.get_user_screen_name(sender_id)
+                            message = message
+                            tw.post_tweet(message, sender_id, screen_name)
+                            tw.delete_dm(id)
+                        else:
+                            tw.delete_dm(id)
+                    else:
                         tw.delete_dm(id)
-                    # else:
-                        # tw.send_dm(sender_id)
             dms = list()
         else:
             print("DM is empty")

@@ -55,7 +55,6 @@ class Twitter:
             api.update_status(msg)
             time.sleep(30)
         except Exception as ex:
-			# belajar deploy heroku
             # api.destroy_direct_message(id)
             # api.send_direct_message(id, "kirim menfess kamu dalam jangka waktu 15 menit untuk menghindari duplikasi")
             print(ex)

@@ -40,7 +40,7 @@ class Twitter:
                 
                 if gambar != '':
                     print(message)
-                    split_msg = message.split("https://t.co/")
+                    split_msg = message.split("https://t.co/", 1)
                     message = split_msg[0]
                     print(message)
                     # nama file sementara

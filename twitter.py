@@ -79,3 +79,12 @@ class Twitter:
             print(ex)
             time.sleep(60)
             pass
+    
+    def send_dm2(self, id, msg):
+        api = self.init_tweepy()
+        try:
+            api.send_direct_message(id, msg)
+        except Exception as ex:
+            print(ex)
+            time.sleep(10)
+            pass

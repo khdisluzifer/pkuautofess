@@ -1,6 +1,8 @@
 import tweepy
 import constant
 import time
+import requests
+from requests_oauthlib import OAuth1
 
 class Twitter:
     def __init__(self):
@@ -34,8 +36,27 @@ class Twitter:
             for x in range(len(dm)):
                 sender_id = dm[x].message_create['sender_id']
                 message = dm[x].message_create['message_data']['text']
-                # print(message)
-                d = dict(message = message, sender_id = sender_id, id = dm[x].id)
+                gambar = dm[x].message_create['message_data']['attachment']['media']['media_url']
+                if gambar != '':
+                    # nama file sementara
+                    file_sementara = 'temp.jpg'
+                    # auth untuk download gambar
+                    headeroauth = OAuth1(
+                        constant.CONSUMER_KEY,
+                        constant.CONSUMER_SECRET,
+                        constant.ACCESS_KEY,
+                        constant.ACCESS_SECRET
+                    )
+                    # request untuk unduh gambar
+                    response = request.get('%s' %gambar, auth=headeroauth)
+                    # jika req berhasil
+                    if response.status_code = 200:
+                        with open(file_sementara, 'wb') as image:
+                            for resp in response:
+                                image.write(resp)
+                    d = dict(message=message, sender_id=sender_id, gambar=file_sementara, id=dm[x].id)
+                else:
+                    d = dict(message=message, sender_id=sender_id, gambar='', id=dm[x].id)
                 dms.append(d)
                 dms.reverse()
             print(str(len(dms))+" terkumpul")

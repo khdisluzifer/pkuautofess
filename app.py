@@ -1,5 +1,5 @@
 from twitter import Twitter
-import time
+import time, requests, os
 
 tw = Twitter()
 def start():
@@ -19,25 +19,33 @@ def start():
             for i in range(len(dms)):
                 message = dms[i]['message']
                 sender_id = dms[i]['sender_id']
+                gambar = dms[i]['gambar']
                 id = dms[i]['id']
+                screen_name = tw.get_user_screen_name(sender_id)
 
                 if len(message) is not 0 and len(message) <= 500:
                     if "pkumf" in message:
+                        # cek apakah dm mengandung kata yang diharamkan
                         res = [ele for ele in haramWords if(ele in message)]
-                        if not res:
-                            screen_name = tw.get_user_screen_name(sender_id)
+                        # jika dm clean...
+                        if not res:                            
                             message = message
-                            tw.post_tweet(message, sender_id, screen_name)
+                            # jika ada gambar
+                            if gambar != '':
+                                # post tweet dengan gambar
+                                tw.post_tweet2(message, sender_id, screen_name, gambar)
+                                os.remove(gambar)
+                            else:
+                                tw.post_tweet(message, sender_id, screen_name)
                             tw.send_dm2(sender_id, "menfess kamu sudah terkirim! terimakasih ya wak")
                             tw.delete_dm(id)
                         else:
-                            screen_name = tw.get_user_screen_name(sender_id)
                             message = message
                             errorMsg = "haram detected by "+screen_name+", msg: "+message
                             print(errorMsg)
                             tw.delete_dm(id)
                     else:
-                        print("tidak sesuai trigger word")
+                        print("tidak sesuai trigger word, sender: ", screen_name)
                         tw.delete_dm(id)
             dms = list()
         else:

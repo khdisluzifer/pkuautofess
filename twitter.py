@@ -36,7 +36,12 @@ class Twitter:
             for x in range(len(dm)):
                 sender_id = dm[x].message_create['sender_id']
                 message = dm[x].message_create['message_data']['text']
-                gambar = dm[x].message_create['message_data']['attachment']['media']['media_url']
+                # jika ada gambar
+                if dm[x].message_create['message_data']['attachment'] != '':
+                    gambar = dm[x].message_create['message_data']['attachment']['media']['media_url']
+                else:
+                    gambar = ''
+                    
                 if gambar != '':
                     # nama file sementara
                     file_sementara = 'temp.jpg'

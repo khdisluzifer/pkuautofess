@@ -15,7 +15,7 @@ def start():
     # print(dms)
     while True:
         if dms:
-            print(len(dms))
+            # print(len(dms))
             for i in range(len(dms)):
                 message = dms[i]['message']
                 sender_id = dms[i]['sender_id']

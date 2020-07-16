@@ -34,9 +34,17 @@ class Twitter:
             dm = api.list_direct_messages()
             print(len(dm))
             for x in range(len(dm)):
+                msg_data = dm[x].message_create['message_data']
                 sender_id = dm[x].message_create['sender_id']
                 message = dm[x].message_create['message_data']['text']
                 gambar = ''
+                try:
+                    if msg_data['attachment']['media']:
+                        gambar = msg_data['attachment']['media']['media_url']
+                    else:
+                        gambar = ''
+                except Exception as ex:
+                    pass
                 if gambar != '':
                     filename = 'temp.jpg'
                     # print(gambar)

@@ -37,6 +37,7 @@ def start():
                             print(errorMsg)
                             tw.delete_dm(id)
                     else:
+                        print("tidak sesuai trigger word")
                         tw.delete_dm(id)
             dms = list()
         else:

@@ -40,6 +40,7 @@ class Twitter:
                 if dm[x].message_create['message_data']['attachment']['media'] != '':
                     split_msg = message.split("https://t.co/")
                     message = split_msg[0]
+                    print(message)
                     gambar = dm[x].message_create['message_data']['attachment']['media']['media_url']
                 else:
                     message = message

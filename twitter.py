@@ -43,7 +43,7 @@ class Twitter:
                     split_msg = message.split("https://t.co/", 1)
                     message = split_msg[0]
                     print(message)
-                    # nama file sementara
+                    # nama file sementara...
                     file_sementara = 'temp.jpg'
                     # auth untuk download gambar
                     headeroauth = OAuth1(

@@ -36,7 +36,7 @@ class Twitter:
             for x in range(len(dm)):
                 sender_id = dm[x].message_create['sender_id']
                 message = dm[x].message_create['message_data']['text']
-                gambar = dm[x].message_create['message_data']['attachment']['media']['media_url']
+                gambar = ''
                 if gambar != '':
                     filename = 'temp.jpg'
                     # print(gambar)

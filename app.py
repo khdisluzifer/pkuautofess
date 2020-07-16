@@ -51,7 +51,7 @@ def start():
         else:
             print("DM is empty")
             dms = tw.read_dm()
-            if len(dms) is 0:
+            if len(dms) is None:
                 time.sleep(30)
 
 if __name__ == "__main__":

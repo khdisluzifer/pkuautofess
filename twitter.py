@@ -59,13 +59,13 @@ class Twitter:
                 dms.reverse()
                 print("tes")
                 print(dms)
-            # print(str(len(dms))+" terkumpul")
+                print(str(len(dms))+" terkumpul")
             
             time.sleep(5)
             return dms
         except Exception as ex:
             print("galat", ex)
-            time.sleep(60)
+            time.sleep(10)
             pass
     
     def post_tweet(self, msg, id, sn):

@@ -81,9 +81,13 @@ class Twitter:
             pass
     
     def send_dm2(self, id, msg):
+        print("kirim dm kalo berhasil...")
         api = self.init_tweepy()
         try:
-            api.send_direct_message(id, msg)
+            if api.send_direct_message(id, msg):
+                print("berhasil dikirim...")
+            else:
+                print("tidak dikirim...")
         except Exception as ex:
             print(ex)
             time.sleep(10)

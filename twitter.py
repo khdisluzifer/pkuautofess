@@ -37,7 +37,7 @@ class Twitter:
                 sender_id = dm[x].message_create['sender_id']
                 message = dm[x].message_create['message_data']['text']
                 # jika ada gambar
-                if dm[x].message_create['message_data']['attachment'] != '':
+                if dm[x].message_create['message_data']['attachment']['media'] != '':
                     split_msg = message.split("https://t.co/")
                     message = split_msg[0]
                     gambar = dm[x].message_create['message_data']['attachment']['media']['media_url']

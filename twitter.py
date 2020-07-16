@@ -32,7 +32,7 @@ class Twitter:
         try:
             api = self.init_tweepy()
             dm = api.list_direct_messages()
-            # print(len(dm))
+            print(len(dm))
             for x in range(len(dm)):
                 sender_id = dm[x].message_create['sender_id']
                 message = dm[x].message_create['message_data']['text']
@@ -61,7 +61,6 @@ class Twitter:
                 print(dms)
                 print(str(len(dms))+" terkumpul")
             
-            time.sleep(5)
             return dms
         except Exception as ex:
             print("galat", ex)

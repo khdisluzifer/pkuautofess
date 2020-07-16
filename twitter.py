@@ -41,8 +41,8 @@ class Twitter:
                 if gambar != '':
                     print(message)
                     split_msg = message.split("https://t.co/", 1)
-                    message = split_msg[0]
-                    print(message)
+                    new_msg = split_msg[0]
+                    print(new_msg)
                     # nama file sementara...
                     file_sementara = 'temp.jpg'
                     # auth untuk download gambar
@@ -59,7 +59,7 @@ class Twitter:
                         with open(file_sementara, 'wb') as image:
                             for resp in response:
                                 image.write(resp)
-                    d = dict(message=message, sender_id=sender_id, gambar=file_sementara, id=dm[x].id)
+                    d = dict(message=new_msg, sender_id=sender_id, gambar=file_sementara, id=dm[x].id)
                 else:
                     d = dict(message=message, sender_id=sender_id, gambar='', id=dm[x].id)
                 dms.append(d)

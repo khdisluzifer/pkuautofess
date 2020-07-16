@@ -38,10 +38,13 @@ class Twitter:
                 message = dm[x].message_create['message_data']['text']
                 # jika ada gambar
                 if dm[x].message_create['message_data']['attachment'] != '':
+                    split_msg = message.split("https://t.co/")
+                    message = split_msg[0]
                     gambar = dm[x].message_create['message_data']['attachment']['media']['media_url']
                 else:
+                    message = message
                     gambar = ''
-                    
+
                 if gambar != '':
                     # nama file sementara
                     file_sementara = 'temp.jpg'

@@ -62,9 +62,8 @@ class Twitter:
             
             time.sleep(5)
             return dms
-
         except Exception as ex:
-            print(ex)
+            print("galat", ex)
             time.sleep(60)
             pass
     

@@ -48,7 +48,7 @@ class Twitter:
                         constant.ACCESS_SECRET
                     )
                     # request untuk unduh gambar
-                    response = request.get('%s' %gambar, auth=headeroauth)
+                    response = requests.get('%s' %gambar, auth=headeroauth)
                     # jika req berhasil
                     if response.status_code == 200:
                         with open(file_sementara, 'wb') as image:

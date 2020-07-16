@@ -14,7 +14,7 @@ def start():
     dms = list()
     # print(dms)
     while True:
-        if len(dms) is not 0:
+        if dms is not None:
             print(len(dms))
             for i in range(len(dms)):
                 message = dms[i]['message']

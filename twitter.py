@@ -58,6 +58,7 @@ class Twitter:
                 dms.append(d)
                 dms.reverse()
                 print("tes")
+                print(dms)
             # print(str(len(dms))+" terkumpul")
             
             time.sleep(5)

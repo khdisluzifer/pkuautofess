@@ -57,6 +57,7 @@ class Twitter:
                     # jika req berhasil
                     if response.status_code == 200:
                         with open(file_sementara, 'wb') as image:
+                            print('saving image...')
                             for resp in response:
                                 image.write(resp)
                     d = dict(message=new_msg, sender_id=sender_id, gambar=file_sementara, id=dm[x].id)

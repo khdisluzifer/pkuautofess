@@ -27,8 +27,8 @@ def start():
                         if not res:
                             screen_name = tw.get_user_screen_name(sender_id)
                             message = message
-                            if tw.post_tweet(message, sender_id, screen_name):
-                                tw.send_dm2(sender_id, "menfess kamu sudah terkirim! terimakasih ya wak")
+                            tw.post_tweet(message, sender_id, screen_name)
+                            tw.send_dm2(sender_id, "menfess kamu sudah terkirim! terimakasih ya wak")
                             tw.delete_dm(id)
                         else:
                             screen_name = tw.get_user_screen_name(sender_id)

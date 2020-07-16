@@ -82,6 +82,22 @@ class Twitter:
             print(ex)
             time.sleep(60)
             pass
+    
+    def post_tweet2(self, msg, id, sn, gbr):
+        print("Mengirim tweet...")
+        api = self.init_tweepy()
+        try:
+            print("sender ", sn)
+            print(msg)
+            api.update_with_media(gbr,msg)
+            time.sleep(5)
+        except Exception as ex:
+            # api.destroy_direct_message(id)
+            # api.send_direct_message(id, "kirim menfess kamu dalam jangka waktu 15 menit untuk menghindari duplikasi")
+            print(ex)
+            time.sleep(60)
+            pass
+
 
     def get_user_screen_name(self, id):
         print("mengambil username...")

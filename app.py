@@ -48,7 +48,7 @@ def start():
                             tw.delete_dm(id)
                     else:
                         print("tidak sesuai trigger word, sender: ", screen_name)
-                        tw.delete_dm(id)
+                        # tw.delete_dm(id)
             dms = list()
         else:
             print("Proses membaca DM")

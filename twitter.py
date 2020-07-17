@@ -38,15 +38,23 @@ class Twitter:
                 sender_id = dm[x].message_create['sender_id']
                 message = dm[x].message_create['message_data']['text']
                 gambar = ''
+                ext = '.jpg'
                 try:
                     if msg_data['attachment']['media']:
                         gambar = msg_data['attachment']['media']['media_url']
+                        if "gif" in gambar:
+                            ext = '.gif'
+                        elif "mp4" in gambar:
+                            ext = '.mp4'
+                        msg_baru = message.split("https://t.co/",1)
+                        message = msg_baru[0]
+
                     else:
                         gambar = ''
                 except Exception as ex:
                     pass
                 if gambar != '':
-                    filename = 'temp.jpg'
+                    filename = 'temp'
                     # print(gambar)
                     headeroauth = OAuth1(constant.CONSUMER_KEY, constant.CONSUMER_SECRET,
                      constant.ACCESS_KEY, constant.ACCESS_SECRET,
@@ -55,7 +63,7 @@ class Twitter:
                     response = requests.get('%s' %gambar, auth=headeroauth)
                     print(response.status_code)
                     if response.status_code == 200:
-                        with open(filename, 'wb') as image:
+                        with open(filename+ext, 'wb') as image:
                             for resp in response:
                                 image.write(resp)
                             print('gambar berhasil diunduh')    

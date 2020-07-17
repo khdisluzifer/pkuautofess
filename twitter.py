@@ -55,8 +55,8 @@ class Twitter:
                 except Exception as ex:
                     pass
                 if gambar != '':
-                    filename = 'temp'
-                    print(filename+ext)
+                    filename = 'temp' + ext
+                    print(filename)
                     # print(gambar)
                     headeroauth = OAuth1(constant.CONSUMER_KEY, constant.CONSUMER_SECRET,
                      constant.ACCESS_KEY, constant.ACCESS_SECRET,
@@ -69,7 +69,7 @@ class Twitter:
                             for resp in response:
                                 image.write(resp)
                             print('gambar berhasil diunduh')    
-                    d = dict(message = message, sender_id = sender_id, gambar = filename+ext, id = dm[x].id)
+                    d = dict(message = message, sender_id = sender_id, gambar = filename, id = dm[x].id)
                 else:
                     d = dict(message = message, sender_id = sender_id, gambar = '', id = dm[x].id)
 

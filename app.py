@@ -41,6 +41,7 @@ def start():
                                 tw.post_tweet(message, sender_id, screen_name)
                             tw.send_dm(sender_id, "menfess kamu sudah terkirim! terimakasih ya wak")
                             tw.delete_dm(id)
+                            time.sleep(10)
                         else:
                             message = message
                             errorMsg = "haram detected by "+screen_name+", msg: "+message
@@ -49,12 +50,13 @@ def start():
                     else:
                         print("tidak sesuai trigger word, sender: ", screen_name)
                         # tw.delete_dm(id)
+                        time.sleep(10)
             dms = list()
         else:
             print("Proses membaca DM")
             dms = tw.read_dm()
             if not dms:
-                time.sleep(30)
+                time.sleep(10)
 
 if __name__ == "__main__":
     start()

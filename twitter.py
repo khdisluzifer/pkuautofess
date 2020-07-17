@@ -91,7 +91,7 @@ class Twitter:
             else:
                 # kirim tweet dengan gambar
                 api.update_with_media(gbr,msg)
-            time.sleep(5)
+            # time.sleep(5)
         except Exception as ex:
             print(ex)
             time.sleep(10)

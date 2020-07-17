@@ -34,7 +34,10 @@ def start():
                             if gambar != '':
                                 # post tweet dengan gambar
                                 tw.post_tweet2(message, sender_id, screen_name, gambar)
-                                os.remove(gambar)
+                                try:
+                                    os.remove(gambar)
+                                except Exception as ex:
+                                    pass
                             else:
                                 tw.post_tweet(message, sender_id, screen_name)
                             tw.send_dm2(sender_id, "menfess kamu sudah terkirim! terimakasih ya wak")

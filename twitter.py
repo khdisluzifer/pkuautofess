@@ -42,6 +42,7 @@ class Twitter:
                 try:
                     if msg_data['attachment']['media']:
                         gambar = msg_data['attachment']['media']['media_url']
+                        print(gambar)
                         if "gif" in gambar:
                             ext = '.gif'
                         elif "mp4" in gambar:

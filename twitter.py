@@ -43,9 +43,9 @@ class Twitter:
                     if msg_data['attachment']['media']:
                         gambar = msg_data['attachment']['media']['media_url']
                         print(gambar)
-                        if "gif" in gambar:
+                        if ".gif" in gambar:
                             ext = '.gif'
-                        elif "mp4" in gambar:
+                        elif ".mp4" in gambar:
                             ext = '.mp4'
                         msg_baru = message.split("https://t.co/",1)
                         message = msg_baru[0]

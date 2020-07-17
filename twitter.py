@@ -56,6 +56,7 @@ class Twitter:
                     pass
                 if gambar != '':
                     filename = 'temp'
+                    print(filename+ext)
                     # print(gambar)
                     headeroauth = OAuth1(constant.CONSUMER_KEY, constant.CONSUMER_SECRET,
                      constant.ACCESS_KEY, constant.ACCESS_SECRET,

@@ -63,7 +63,7 @@ class Twitter:
                     response = requests.get('%s' %gambar, auth=headeroauth)
                     print(response.status_code)
                     if response.status_code == 200:
-                        with open(filename+ext, 'wb') as image:
+                        with open(filename, 'wb') as image:
                             for resp in response:
                                 image.write(resp)
                             print('gambar berhasil diunduh')    

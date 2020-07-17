@@ -12,10 +12,9 @@ def start():
         ]
     print("Starting program...")
     dms = list()
-    # print(dms)
+    
     while True:
         if len(dms) is not 0:
-            # print(len(dms))
             for i in range(len(dms)):
                 message = dms[i]['message']
                 sender_id = dms[i]['sender_id']
@@ -33,14 +32,14 @@ def start():
                             # jika ada gambar
                             if gambar != '':
                                 # post tweet dengan gambar
-                                tw.post_tweet2(message, sender_id, screen_name, gambar)
+                                tw.post_tweet(message, sender_id, screen_name, gambar)
                                 try:
                                     os.remove(gambar)
                                 except Exception as ex:
                                     pass
                             else:
                                 tw.post_tweet(message, sender_id, screen_name)
-                            tw.send_dm2(sender_id, "menfess kamu sudah terkirim! terimakasih ya wak")
+                            tw.send_dm(sender_id, "menfess kamu sudah terkirim! terimakasih ya wak")
                             tw.delete_dm(id)
                         else:
                             message = message
@@ -52,7 +51,7 @@ def start():
                         tw.delete_dm(id)
             dms = list()
         else:
-            print("DM is empty")
+            print("Proses membaca DM")
             dms = tw.read_dm()
             if not dms:
                 time.sleep(30)

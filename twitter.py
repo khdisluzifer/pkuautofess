@@ -6,7 +6,7 @@ from requests_oauthlib import OAuth1
 
 class Twitter:
     def __init__(self):
-        print("init twitter api")
+        print("engine start")
 
     @staticmethod
     def init_tweepy():
@@ -16,7 +16,6 @@ class Twitter:
     
     def delete_dm(self, id):
         print("Delete dm with id "+ str(id))
-
         try:
             api = self.init_tweepy()
             api.destroy_direct_message(id)
@@ -38,16 +37,14 @@ class Twitter:
                 sender_id = dm[x].message_create['sender_id']
                 message = dm[x].message_create['message_data']['text']
                 gambar = ''
-                ext = '.jpg'
                 try:
+                    # jika dm mengandung gambar
                     if msg_data['attachment']['media']:
+                        # ambil url gambar
                         gambar = msg_data['attachment']['media']['media_url']
-                        print(gambar)
-                        if ".gif" in gambar:
-                            ext = '.gif'
-                        elif ".mp4" in gambar:
-                            ext = '.mp4'
+                        # hapus url gambar dari isi tweet
                         msg_baru = message.split("https://t.co/",1)
+                        # tweet tanpa url gambar
                         message = msg_baru[0]
 
                     else:
@@ -55,13 +52,14 @@ class Twitter:
                 except Exception as ex:
                     pass
                 if gambar != '':
-                    filename = 'temp' + ext
-                    print(filename)
-                    # print(gambar)
-                    headeroauth = OAuth1(constant.CONSUMER_KEY, constant.CONSUMER_SECRET,
-                     constant.ACCESS_KEY, constant.ACCESS_SECRET,
-                     signature_type='auth_header')
-                    # authe = tweepy.OAuthHandler(constant.CONSUMER_KEY, constant.CONSUMER_SECRET)
+                    filename = 'temp.jpg'
+                    # auth untuk request gambar
+                    headeroauth = OAuth1(
+                        constant.CONSUMER_KEY, constant.CONSUMER_SECRET,
+                        constant.ACCESS_KEY, constant.ACCESS_SECRET,
+                        signature_type='auth_header'
+                    )
+                    # request gambar dari twitter
                     response = requests.get('%s' %gambar, auth=headeroauth)
                     print(response.status_code)
                     if response.status_code == 200:
@@ -72,49 +70,32 @@ class Twitter:
                     d = dict(message = message, sender_id = sender_id, gambar = filename, id = dm[x].id)
                 else:
                     d = dict(message = message, sender_id = sender_id, gambar = '', id = dm[x].id)
-
                 dms.append(d)
                 dms.reverse()
-                print("tes")
-                print(dms)
-                print(str(len(dms))+" terkumpul")
-            
+                print(str(len(dms))+" terkumpul")            
             return dms
         except Exception as ex:
             print("galat", ex)
             time.sleep(10)
             pass
     
-    def post_tweet(self, msg, id, sn):
+    def post_tweet(self, msg, id, sn, gbr=''):
         print("Mengirim tweet...")
         api = self.init_tweepy()
         try:
             print("sender ", sn)
             print(msg)
-            api.update_status(msg)
+            if gbr == '':
+                # kirim tweet
+                api.update_status(msg)
+            else:
+                # kirim tweet dengan gambar
+                api.update_with_media(gbr,msg)
             time.sleep(5)
         except Exception as ex:
-            # api.destroy_direct_message(id)
-            # api.send_direct_message(id, "kirim menfess kamu dalam jangka waktu 15 menit untuk menghindari duplikasi")
             print(ex)
-            time.sleep(60)
+            time.sleep(10)
             pass
-    
-    def post_tweet2(self, msg, id, sn, gbr):
-        print("Mengirim tweet...")
-        api = self.init_tweepy()
-        try:
-            print("sender ", sn)
-            print(msg)
-            api.update_with_media(gbr,msg)
-            time.sleep(5)
-        except Exception as ex:
-            # api.destroy_direct_message(id)
-            # api.send_direct_message(id, "kirim menfess kamu dalam jangka waktu 15 menit untuk menghindari duplikasi")
-            print(ex)
-            time.sleep(60)
-            pass
-
 
     def get_user_screen_name(self, id):
         print("mengambil username...")
@@ -122,19 +103,7 @@ class Twitter:
         user = api.get_user(id)
         return user.screen_name
 
-    def send_dm(self, id):
-        print("membalas pesan, tidak sesuai trigger")
-        api = self.init_tweepy()
-        try:
-            #api.send_direct_message(id, "trigger word tidak sesuai. gunakan rzmf untuk mengirim menfess!")
-            api.destroy_direct_message(id)
-        except Exception as ex:
-            # api.send_direct_message(id, "kirim menfess kamu dalam jangka waktu 15 menit untuk menghindari duplikasi")
-            print(ex)
-            time.sleep(60)
-            pass
-    
-    def send_dm2(self, id, msg):
+    def send_dm(self, id, msg):
         print("kirim dm kalo berhasil...")
         api = self.init_tweepy()
         try:

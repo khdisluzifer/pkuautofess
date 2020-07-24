@@ -53,6 +53,10 @@ class Twitter:
                     pass
                 if gambar != '':
                     filename = 'temp.jpg'
+                    try:
+                        os.remove(gambar)
+                    except Exception as ex:
+                        pass
                     # auth untuk request gambar
                     headeroauth = OAuth1(
                         constant.CONSUMER_KEY, constant.CONSUMER_SECRET,
